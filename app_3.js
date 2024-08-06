@@ -2,9 +2,11 @@
 
 'use strict';
 
-var num1 = 1;
-var num2 = 2;
-var operator = prompt('add type operator: +, -, *, /')
+var num1 = Number(prompt('add first number:', 'only number'));
+var num2 = Number(prompt('add second number:', 'only number'));
+var operator = prompt(
+	`add type operator: +, -, *, /, for your numbers ${num1} & ${num2}`
+);
 
 function add(a, b) {
 	return a + b;
@@ -19,11 +21,24 @@ function divide(a, b) {
 	return a / b;
 }
 
-function showAlert(){
-    alert('Wrong operator');
+function showError() {
+	alert('Wrong operator');
+}
+
+function showResult(result) {
+	alert(`Result is ${result}`);
+}
+
+function displayInfo(error, result) {
+	if (error) {
+		showError();
+	} else {
+		showResult(result);
+	}
 }
 
 var result = 0;
+var error = false;
 
 switch (operator) {
 	case '+':
@@ -38,8 +53,8 @@ switch (operator) {
 	case '/':
 		result = divide(num1, num2);
 		break;
-    default:
-        showAlert();
+	default:
+		error = true;
 }
 
-console.log(result);
+displayInfo(error, result);
